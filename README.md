@@ -1,2 +1,2 @@
-# Yelpcamp
+# Campgrounds
 Campgrounds review website
