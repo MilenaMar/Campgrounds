@@ -2,6 +2,9 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const engine = require('ejs-mate');
+
+//Joi  does data validation 
+const Joi = require('joi');
 // catch async makes sure we catch the error (in case there is any) and pass it into next.
 const catchAsync = require ('./utilities/catchAsync');
 const ExpressError = require ('./utilities/ExpressError');
@@ -47,8 +50,24 @@ app.get ('/campgrounds/new', (req, res) => {
 
 
 app.post('/campgrounds/new', catchAsync(async (req, res, next) => {
-    if(!req.body.campground) throw new ExpressError('Invalid Campground Data', 400)
-        const campground= new Campground(req.body.campground);
+ //   if(!req.body.campground) throw new ExpressError('Invalid Campground Data', 400)
+ //  campgroundSchema is not a schema it validates our data before it sends the data to mongo.
+ const campgroundSchema = Joi.object({
+         campground: Joi.object({
+         title: Joi.string().required(),
+         location: Joi.string().required(),
+         price: Joi.number().required().min(0),
+         description : Joi.string().required(),
+         image: Joi.string().required(),
+     }).required()
+ })
+ const {error} = campgroundSchema.validate(req.body);
+
+ if(error){
+     const msg = error.details.map (el => el.message).join(',')
+     throw new ExpressError(msg, 400)
+ }
+ const campground= new Campground(req.body.campground);
         await campground.save();
         res.redirect(`/campgrounds/${campground._id}`)
    
@@ -79,14 +98,15 @@ app.delete('/campgrounds/:id', catchAsync(async (req, res) => {
 /* for every path call 404, the order is importat 
 as it will only resolve if nothing has solve before */
 app.all('*', (req, res, next) => {
-    next(new ExpressError('Page not found', 404))
+    next(new ExpressError('Page Not Found', 404))
 })
 
    
    // next --> if error 
 app.use((err, req, res, next) => {
- const {statusCode = 500 , message = 'Something Went wrong'} = err;
- res.status (statusCode).send(message)
+ const {statusCode = 500}= err;
+ if(!err.message) err.message = 'Oh No, Something went Wrong'
+ res.status (statusCode).render('error', {err})
 })
 
 /* check if database is now working
