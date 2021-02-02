@@ -28,7 +28,8 @@ const seedDB = async () => {
            author:'6013ef010c2d060a6101d16d',
             location:`${cities[randomNumber].city},${cities[randomNumber].state}`,
             title:`${sample(descriptors)} ${sample(places)}`,
-            image:'https://source.unsplash.com/collection/483251',
+            images: [ {url: 'https://source.unsplash.com/collection/483251',
+                filename: 'lorem' }],
             description:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa fugiat error quam voluptate non ratione aperiam reiciendis consectetur accusamus officia, atque quae, necessitatibus reprehenderit, sint assumenda eius adipisci consequatur nemo!',
             price
         })
