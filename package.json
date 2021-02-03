@@ -19,6 +19,7 @@
   "homepage": "https://github.com/MilenaMar/Yelpcamp#readme",
   "keywords": [],
   "dependencies": {
+    "@mapbox/mapbox-sdk": "^0.12.0",
     "cloudinary": "^1.24.0",
     "connect-flash": "^0.1.1",
     "dotenv": "^8.2.0",
