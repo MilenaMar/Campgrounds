@@ -16,7 +16,21 @@ module.exports.descriptors = [
     'Sea',
     'Sky',
     'Dusty',
-    'Diamond'
+    'Diamond', 
+    'Bustling',
+    'Calm' ,
+    'Charming' ,
+    'Cosmopolitan ',
+    'Enchanting ',
+    'Fascinating',
+    'Fresh' ,
+    'Homey ',
+    'Inspiring' ,
+    'Lively ',
+    'Peaceful',
+    'Picturesque ',
+    'Unspoiled' ,
+    'Vibrant '
 ]
 
 module.exports.places = [
@@ -40,5 +54,10 @@ module.exports.places = [
     'Mule Camp',
     'Hunting Camp',
     'Cliffs',
-    'Hollow'
+    'Hollow',
+    'Valley',
+    'Grey',
+    'Point',
+    'Cathaig',
+    'Head'
 ]
