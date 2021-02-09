@@ -1,7 +1,7 @@
 mapboxgl.accessToken = mapToken;
 var map = new mapboxgl.Map({
 container: 'map',
-style: 'mapbox://styles/mapbox/dark-v10',
+style: 'mapbox://styles/mapbox/light-v10',
 center: [-103.59179687498357, 40.66995747013945],
 zoom: 3
 });
@@ -34,20 +34,20 @@ paint: {
 'circle-color': [
 'step',
 ['get', 'point_count'],
-'#51bbd6',
-100,
-'#f1f075',
-750,
-'#f28cb1'
+'#00BCD4',
+10,
+'#2196F3',
+30,
+'#3F51B5'
 ],
 'circle-radius': [
 'step',
 ['get', 'point_count'],
+15,
+10,
 20,
-100,
 30,
-750,
-40
+30
 ]
 }
 });
@@ -121,7 +121,7 @@ coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
 new mapboxgl.Popup()
 .setLngLat(coordinates)
 .setHTML(
-'magnitude: ' + mag + '<br>Was there a tsunami?: ' + tsunami
+'<h3>Campground</h3>'
 )
 .addTo(map);
 });
