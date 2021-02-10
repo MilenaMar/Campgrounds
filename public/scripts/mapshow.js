@@ -5,7 +5,7 @@
   center: campground.geometry.coordinates, // starting position [lng, lat]
   zoom: 4 // starting zoom
   });
-  
+  map.addControl(new mapboxgl.NavigationControl());
   const marker = new mapboxgl.Marker({
     color: "#D44C59",
     })

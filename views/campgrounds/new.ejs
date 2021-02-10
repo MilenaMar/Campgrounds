@@ -1,8 +1,10 @@
 <% layout ('layout/boilerplate') %>
 
 <div class="row">
-  <h1 class="text-center">New Campground</h1>
-  <div class="col-6 offset-3">
+  <h1 class="text-center mb-5">New Campground</h1>
+  <div class="col-6 offset-3 mb-3">
+    <div class="card shadow">
+      <div class="card-body">
     <form action="/campgrounds/new" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
       <div class="mb-3"> 
           <label for="title" class="form-label">Title</label>
@@ -29,10 +31,12 @@
       <textarea class="form-control" type="text" id="description" name="campground[description]"  required></textarea>
     </div>
       <div class="mb-3">
-        <button class="btn btn-success" type="submit"> Add Campground</button>
+        <button class="btn btn-success col-12" type="submit"> Add Campground</button>
       </div>
     </form>
-    <button><a href="/campgrounds">Go back</a></button>
+    <a class="card-link btn btn-primary col-12" href="/campgrounds">All Campgrounds</a>
   </div>
+</div>
+</div>
 </div>
     

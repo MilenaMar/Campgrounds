@@ -15,6 +15,9 @@ ImageSchema.virtual('thumbnail').get(function() {
     return this.url.replace('/upload', '/upload/w_200')
 })
 
+/*By default monoogose does not include virtuals when converted to Json*/
+const opts = {toJSON: {virtuals:true}} 
+
 const CampgroundSchema = new Schema ({
         title:String,
         price:Number,
@@ -40,8 +43,13 @@ const CampgroundSchema = new Schema ({
             type: Schema.Types.ObjectId,
             ref:'Review'
         }]
-    })
+    }, opts)
 
+    /*virtual for the properties of the cluster map */
+    CampgroundSchema.virtual('properties.popMarkup').get(function() {
+        return `<strong><a href="/campgrounds/${this._id}">${this.title}</a></strong>
+        <p>${this.location} <br> ${this.price} € p/n</p>`
+    })
 
     CampgroundSchema.post('findOneAndDelete', async function (doc){
     if(doc){
