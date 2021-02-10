@@ -1,10 +1,10 @@
 const User = require('../models/user');
 
-module.exports.singUpForm = (req, res) => {
-    res.render('users/singup')
+module.exports.signUpForm = (req, res) => {
+    res.render('users/signup')
 }
 
-module.exports.singUp = async(req, res) => {
+module.exports.signUp = async(req, res) => {
     try {
     const { email, username, password} = req.body
     const user = await new User({email, username});
@@ -18,7 +18,7 @@ module.exports.singUp = async(req, res) => {
     })
     } catch (e){
         req.flash('error', e.message)
-        res.redirect('/singup')
+        res.redirect('/signup')
     }  
 }
 

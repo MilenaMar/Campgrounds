@@ -5,9 +5,9 @@ const passport = require('passport');
 const { isLoggedIn } = require('../middleware');
 const users = require('../controllers/users')
 
-router.route('/singup')
-  .get(users.singUpForm )
-  .post(catchAsync(users.singUp))
+router.route('/signup')
+  .get(users.signUpForm )
+  .post(catchAsync(users.signUp))
 
 router.route('/login')
    .get( users.loginForm)

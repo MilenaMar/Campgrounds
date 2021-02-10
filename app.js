@@ -2,6 +2,7 @@ if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config();
 }
 
+
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -13,12 +14,14 @@ const flash = require('connect-flash') // enable notifications and messages to t
 const passport = require('passport');
 const LocalStrategy = require('passport-local')
 const User = require('./models/user')
+const helmet = require('helmet')
 
 const campgrounds = require('./routes/campgrounds');
 const reviews = require ('./routes/reviews')
 const users =require('./routes/user')
-
-mongoose.connect ('mongodb://localhost:27017/yelp-camp',{
+const dbUrl= process.env.DB_URL
+const MongoDBStore = require("connect-mongo")(session);
+mongoose.connect (dbUrl,{
  useNewUrlParser:true,
  useCreateIndex:true,
  useUnifiedTopology:true,
@@ -41,12 +44,25 @@ app.use(express.urlencoded({extended:true})) // allowed us to parse the req.body
 app.use(methodOverride ('_method'))//allow express to override a method send in a form
 app.use(express.static(path.join(__dirname,'public')))// telling express to serve the public directory
 
+
+const store = new MongoDBStore({
+    url:dbUrl,
+    secret:process.env.SECRET,
+    touchAfter: 24 * 60 * 60
+})
+
+store.on('error', function (e) {
+    console.log('Session Store Error',e)
+})
 const sessionConfig = {
-    secret: 'lazy cat!',
+    store,
+    name:'CampUser',
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie:{
         httpOnly: true,
+        //secure:true,
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7, //1 week
         maxAge:1000 * 60 * 60 * 24 * 7,
     }
@@ -54,6 +70,56 @@ const sessionConfig = {
 
 app.use(session(sessionConfig)) // use before passport.session 
 app.use(flash())
+app.use(helmet())
+
+
+const scriptSrcUrls = [
+    "https://stackpath.bootstrapcdn.com/",
+    "https://api.tiles.mapbox.com/",
+    "https://api.mapbox.com/",
+    "https://kit.fontawesome.com/",
+    "https://cdnjs.cloudflare.com/",
+    "https://cdn.jsdelivr.net",
+];
+
+const styleSrcUrls = [
+    "https://kit-free.fontawesome.com/",
+    "https://api.mapbox.com/",
+    "https://api.tiles.mapbox.com/",
+    "https://fonts.googleapis.com/",
+    "https://use.fontawesome.com/",
+    "https://cdn.jsdelivr.net",
+    "https://stackpath.bootstrapcdn.com/"
+];
+const connectSrcUrls = [
+    "https://api.mapbox.com/",
+    "https://a.tiles.mapbox.com/",
+    "https://b.tiles.mapbox.com/",
+    "https://events.mapbox.com/",
+];
+const fontSrcUrls = [];
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            defaultSrc: [],
+            connectSrc: ["'self'", ...connectSrcUrls],
+            scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+            styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+            workerSrc: ["'self'", "blob:"],
+            objectSrc: [],
+            imgSrc: [
+                "'self'",
+                "blob:",
+                "data:",
+                "https://res.cloudinary.com/dwttlckdr/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
+                "https://images.unsplash.com/",
+            ],
+            fontSrc: ["'self'", ...fontSrcUrls],
+        },
+    })
+);
+
+
 
 app.use(passport.initialize())
 app.use(passport.session())
