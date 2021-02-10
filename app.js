@@ -15,6 +15,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local')
 const User = require('./models/user')
 const helmet = require('helmet')
+const favicon = require("serve-favicon");
 
 const campgrounds = require('./routes/campgrounds');
 const reviews = require ('./routes/reviews')
@@ -43,6 +44,7 @@ app.set ('views', path.join(__dirname,'views'))
 app.use(express.urlencoded({extended:true})) // allowed us to parse the req.body
 app.use(methodOverride ('_method'))//allow express to override a method send in a form
 app.use(express.static(path.join(__dirname,'public')))// telling express to serve the public directory
+app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")) );
 
 
 const store = new MongoDBStore({
