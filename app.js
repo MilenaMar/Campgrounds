@@ -19,7 +19,7 @@ const helmet = require('helmet')
 const campgrounds = require('./routes/campgrounds');
 const reviews = require ('./routes/reviews')
 const users =require('./routes/user')
-const dbUrl= process.env.DB_URL
+const dbUrl= process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp'
 const MongoDBStore = require("connect-mongo")(session);
 mongoose.connect (dbUrl,{
  useNewUrlParser:true,
