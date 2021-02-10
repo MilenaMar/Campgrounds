@@ -3,9 +3,9 @@
   container: 'map',
   style: 'mapbox://styles/mapbox/light-v10',
   center: campground.geometry.coordinates, // starting position [lng, lat]
-  zoom: 4 // starting zoom
+  zoom: 5 // starting zoom
   });
-  map.addControl(new mapboxgl.NavigationControl());
+  
   const marker = new mapboxgl.Marker({
     color: "#D44C59",
     })
