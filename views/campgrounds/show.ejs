@@ -49,7 +49,7 @@
 <div class="col-6">
   <div id='map' class="mb-3"></div>
   <% if(user) { %>
-  <h2 class="mb-5"> Leave a review </h2>
+  <h2 class="mb-5 text-white"> Leave a review </h2>
   <form action="/campgrounds/<%= campground._id %>/reviews" method="POST" class="mb-3 validated-form" novalidate>
     <div>
     <fieldset class="starability-heart">
@@ -67,7 +67,7 @@
     </fieldset>
   </div>
     <div class="mb-3">
-      <label class="form-label" for="body">Review text</label>
+      <label class="form-label text-white" for="body">Review text</label>
       <textarea class="form-control"  name="review[body]" id="body" cols="30" rows="3" required></textarea>
     </div>
     <button class=" btn btn-success">Submit</button>
