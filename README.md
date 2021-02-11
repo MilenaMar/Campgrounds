@@ -1,17 +1,13 @@
 # Campgrounds
 
 <p align="center">
-  <img width="460" height="300" src="https://github.com/MilenaMar/Campgrounds/blob/main/public/images/logo.png" alt="logo">
-  Campgrounds review website
+  <img src="https://github.com/MilenaMar/Campgrounds/blob/main/public/images/logo.png">
 </p>
-  
-
-
 
 ## Description
 
 Campgrounds is a Web Application that allows users to post information about Campsites, and also add reviews. 
-Users also Have acces to a cluster map where they can see the campsites/campgrounds by location.  
+Users also Have acces to a cluster map where they can see the  campsites/campgrounds by location.  
 ![Image](https://github.com/MilenaMar/Campgrounds/blob/main/public/images/thumb.png)
 
 ## User Stories
