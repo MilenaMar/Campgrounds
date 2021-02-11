@@ -1,5 +1,10 @@
 # Campgrounds
- ![Image](https://github.com/MilenaMar/Campgrounds/blob/main/public/images/logo.png) Campgrounds review website 
+
+<p align="center">
+  <img width="460" height="300" src="https://github.com/MilenaMar/Campgrounds/blob/main/public/images/logo.png" alt="logo">
+  Campgrounds review website
+</p>
+  
 
 
 
