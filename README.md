@@ -1,13 +1,13 @@
 # Campgrounds
- ![Image](https://github.com/MilenaMar/Campgrounds/tree/main/public/images/logo.png) Campgrounds review website 
+ ![Image](https://github.com/MilenaMar/Campgrounds/blob/main/public/images/logo.png) Campgrounds review website 
 
 
 
 ## Description
 
-Campgrounds is a Web Application that allows users to post information about Campsites, and also add reviews to the campsites. 
-Users also Have acces to a cluster map where they can find campsites/campgrounds by location.  
-![Image](https://github.com/MilenaMar/Campgrounds/tree/main/public/images/thumb.png)
+Campgrounds is a Web Application that allows users to post information about Campsites, and also add reviews. 
+Users also Have acces to a cluster map where they can see the campsites/campgrounds by location.  
+![Image](https://github.com/MilenaMar/Campgrounds/blob/main/public/images/thumb.png)
 
 ## User Stories
 
@@ -100,7 +100,7 @@ Campgrounds
 
 ###### Campground model
 
-```javascript 
+``` 
 - ImageSchema:  url: String, filename:String
 
 - title:String,
@@ -131,7 +131,7 @@ Campgrounds
 
 ##### Review model 
 
-```javascript 
+```
 
 - body: String,
 - rating:Number, 
